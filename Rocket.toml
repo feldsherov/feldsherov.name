@@ -1,0 +1,7 @@
+[global]
+log = "normal"
+
+[global.tls]
+certs = "private/cert.pem"
+key = "private/key.pem"
+
