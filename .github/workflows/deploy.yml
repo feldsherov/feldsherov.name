@@ -1,4 +1,4 @@
-name: scp copy folder to remote via SSH
+name: deploy
 
 on:
   push:
@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: checkout
+        uses: actions/checkout@master
       - name: Copy to remote host
         uses: appleboy/scp-action@master
         with:
