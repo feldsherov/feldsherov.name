@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission:4.0.3
+    container_name: transmission
+    environment:
+      - PUID=1000 # User id
+      - PGID=1000 # Group id
+      - TZ=Asia/Jerusalem # Your current timezone
+    volumes:
+      - /storage/transmission:/config # Change this to your docker config folder
+      - /storage/downloads:/downloads # Change this to your download folder
+    ports:
+      - 9091:9091 # Web UI port
+      - 51413:51413 # Torrent port (TCP)
+      - 51413:51413/udp # Torrent port (UDP)
+    restart: unless-stopped # This makes sure that the application restarts when it crashes
+  samba:
+    container_name: samba
+    restart: always
+    build: samba
+    network_mode: "host"
+    expose:  
+      - 445
+    volumes:
+      - /storage:/storage:ro
+      - ./samba/smb.conf:/etc/samba/smb.conf
