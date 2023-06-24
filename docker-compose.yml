@@ -22,7 +22,6 @@ services:
       - /storage/transmission:/config # Change this to your docker config folder
       - /storage/downloads:/downloads # Change this to your download folder
     ports:
-      - 9091:9091 # Web UI port
       - 51413:51413 # Torrent port (TCP)
       - 51413:51413/udp # Torrent port (UDP)
     restart: unless-stopped # This makes sure that the application restarts when it crashes
