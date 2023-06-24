@@ -16,7 +16,7 @@ ExecStartPre=/usr/bin/docker-compose rm -f
 # ExecStartPre=/usr/bin/docker-compose pull
 
 #   Run Compose up on service start.
-ExecStart=/usr/bin/docker-compose up
+ExecStart=/usr/bin/docker-compose up --abort-on-container-exit
 
 #   Run Compose down, remove containers and volumes on service stop.
 ExecStop=/usr/bin/docker-compose down
