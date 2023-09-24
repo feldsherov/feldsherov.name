@@ -14,6 +14,7 @@ services:
   transmission:
     image: lscr.io/linuxserver/transmission:4.0.3
     container_name: transmission
+    network_mode: "host"
     environment:
       - PUID=1000 # User id
       - PGID=1000 # Group id
