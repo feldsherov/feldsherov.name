@@ -2,6 +2,7 @@ version: "3.7"
 services:
   gateway:
     image: nginx:1.25.1
+    network_mode: "host"
     volumes:
       - type: bind
         source: ./gateway/nginx.conf
@@ -13,8 +14,8 @@ services:
       - transmission
   transmission:
     image: lscr.io/linuxserver/transmission:4.0.3
-    container_name: transmission
     network_mode: "host"
+    container_name: transmission
     environment:
       - PUID=1000 # User id
       - PGID=1000 # Group id
@@ -23,6 +24,7 @@ services:
       - /storage/transmission:/config # Change this to your docker config folder
       - /storage/downloads:/downloads # Change this to your download folder
     ports:
+      - 9091:9091 # Web UI port
       - 51413:51413 # Torrent port (TCP)
       - 51413:51413/udp # Torrent port (UDP)
     restart: unless-stopped # This makes sure that the application restarts when it crashes
